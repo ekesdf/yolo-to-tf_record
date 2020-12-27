@@ -65,13 +65,13 @@ def create_tf_example(item_number):
     }))
     return tf_example
 
+writer = tf.python_io.TFRecordWriter("yahoo.record")
+
 for item in os.listdir():
     
     if item.endswith(".jpg"):
 
         test = create_tf_example(item)
-
-        writer = tf.python_io.TFRecordWriter("yahoo.record")
         writer.write(test.SerializeToString())
 
 writer.close()
