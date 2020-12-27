@@ -67,7 +67,7 @@ def create_tf_example(item_number):
 
 writer = tf.python_io.TFRecordWriter("yahoo.record")
 
-for item in os.listdir():
+for item in os.listdir(os.getcwd()):
     
     if item.endswith(".jpg"):
 
