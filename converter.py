@@ -34,9 +34,14 @@ def create_tf_example(item_number):
     classes = []
 
     file = open(str(itemnumber)+".txt","r")
-
+    
+    
+    
     for row in file.readlines():
-        print(row)
+        
+        #every line is one Boundingbox
+        
+        # print(row)
         xmins.append(float(row.split(" ")[1]))
         xmaxs.append(float(row.split(" ")[3]))
         ymins.append(float(row.split(" ")[2]))
@@ -61,10 +66,12 @@ def create_tf_example(item_number):
     return tf_example
 
 for item in os.listdir():
+    
+    if item.endswith(".jpg"):
 
-    test = create_tf_example(99999)
+        test = create_tf_example(item)
 
-    writer = tf.python_io.TFRecordWriter("yahoo.record")
-    writer.write(test.SerializeToString())
+        writer = tf.python_io.TFRecordWriter("yahoo.record")
+        writer.write(test.SerializeToString())
 
 writer.close()
